@@ -5,6 +5,9 @@
 
 
 a.active{
-  @apply bg-base-300;
+  @apply bg-purple-700;
+  @apply text-white;
+  @apply px-[10px];
+
   @apply underline
 }

@@ -18,7 +18,8 @@ const router = createBrowserRouter([
       },
       {
         path:'/home',
-        element:<Home/>
+        element:<Home/>,
+        loader: () => fetch('/games-data.json')
       },
       
       {
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
         element:<Games/>
       },
       {
-        path:'/my-profile',
+        path:'/blog',
         element:<Games/>
       },
       
