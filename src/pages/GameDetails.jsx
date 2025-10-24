@@ -44,6 +44,7 @@ const GameDetails = () => {
 
   return (
     <div className=" bg-[#0b0b15] text-gray-200 py-12 px-4 md:px-10">
+      <title>{  game.title}</title>
       <div className="max-w-5xl mx-auto bg-[#121225] p-8 rounded-2xl shadow-xl border border-gray-700">
         <div className="flex flex-col md:flex-row items-start md:items-center gap-10">
           {/* Game Cover */}

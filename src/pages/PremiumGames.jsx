@@ -20,6 +20,7 @@ const PremiumGames = () => {
 
   return (
     <div className="pt-[50px]">
+      <title>GameHub - Premium games</title>
       <Container>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 py-15">
           {premiumGames.map((game) => (

@@ -21,6 +21,7 @@ const Games = () => {
 
   return (
     <div className="pt-[60px] pb-[100px] bg-[#0b0b15] min-h-screen text-white">
+      <title>GameHub - Games</title>
       <Container>
         {/* Section Title */}
         <div className="text-center mb-10">

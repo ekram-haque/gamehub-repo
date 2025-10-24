@@ -10,6 +10,7 @@ const MyProfile = () => {
 
   return (
     <div className=" bg-[#0b0b15] text-gray-200 py-29 px-4 md:px-10">
+      <title>GameHub - Profile Page</title>
       <div className="max-w-4xl mx-auto bg-[#121225] p-8 rounded-2xl shadow-xl border border-gray-700">
         <div className="flex flex-col md:flex-row items-center gap-10">
           {/* Profile Photo */}

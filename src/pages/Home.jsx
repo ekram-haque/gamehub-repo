@@ -10,6 +10,7 @@ import Container from "../components/Container";
 const Home = () => {
   return (
     <div className="pt-[50px]">
+      <title>GameHub - Home</title>
       <Container>
         <section>
           <Banner />
