@@ -1,16 +1,15 @@
 import React from "react";
 import Banner from "../components/Banner";
 import Newsletter from "../components/Newsletter";
-import useGames from "../hooks/usegames";
+
 import Category from "../components/Category";
-import Container from "../components/container";
+
 import TopGames from "../components/TopGames";
+import Container from "../components/Container";
 
 const Home = () => {
-  const { games } = useGames();
-  console.log(games);
   return (
-    <div>
+    <div className="pt-[50px]">
       <Container>
         <section>
           <Banner />
@@ -20,7 +19,7 @@ const Home = () => {
           <Category />
         </section>
         <section>
-            <TopGames/>
+          <TopGames />
         </section>
       </Container>
       <section>

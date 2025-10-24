@@ -1,39 +1,75 @@
 import React from "react";
-import useGames from "../hooks/usegames";
+
+import GameCard from "./GameCard";
+import useGames from "../hooks/useGames";
+import { Link } from "react-router";
+import LoadingAnim from "./LoadingAnim";
 
 const TopGames = () => {
-  const { games } = useGames();
+  const { games, loading } = useGames();
+  if (loading || games.length === 0) {
+    return (
+      <div className="text-center text-gray-400 mt-10 flex justify-center items-center h-screen bg-[#0b0b15]">
+        <LoadingAnim />
+      </div>
+    );
+  }
 
+  // Sort by rating (highest first) and pick top 7
   const topGames = [...games].sort((a, b) => b.ratings - a.ratings).slice(0, 7);
-  console.log(topGames);
 
   return (
-    <div className="py-[50px]  ">
-      {/* games header section here  */}
-      <div className=" text-center ">
-        <h2 className="font-bold text-2xl ">Top Games </h2>
-        <p>top games by ratings will show here.</p>
+    <section className="bg-[#0f0f1a] py-16 text-white">
+      {/* Header */}
+      <div className="text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
+          Top Rated Games
+        </h2>
+        <p className="text-gray-400 mt-2">
+          Discover the most loved games — handpicked by rating & popularity.
+        </p>
       </div>
 
-      {/* games card show here  */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+      {/* Games Grid */}
+
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2  gap-8 px-6">
         {topGames.map((game) => (
-          <div
-            key={game.id}
-            className="bg-white shadow-md rounded-lg p-4 flex flex-col items-center"
-          >
-            <img
-              src={game.coverPhoto}
-              alt={game.title}
-              className="w-32 h-32 object-cover rounded-md mb-2"
-            />
-            <h2 className="text-lg font-bold">{game.title}</h2>
-            <p className="text-gray-600">Rating: {game.ratings}</p>
-            <p className="text-gray-500 text-sm">{game.category}</p>
-          </div>
+          <Link to={`/games/${game.id}`}>
+            <div className="group flex items-center gap-4 bg-[#181826] rounded-2xl p-4 border border-transparent hover:border-purple-500 hover:shadow-purple-700/30 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer">
+              {/* Image */}
+              <div className="shrink-0 overflow-hidden rounded-xl">
+                <img
+                  src={game.coverPhoto}
+                  alt={game.title}
+                  className="w-20 h-20 object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+
+              {/* Text Content */}
+              <div className="flex flex-col flex-1 min-w-0">
+                <h3 className="text-base font-semibold text-white group-hover:text-purple-400 transition-colors duration-300 truncate">
+                  {game.title}
+                </h3>
+
+                <p className="text-sm text-gray-400 mt-1 line-clamp-2">
+                  {game.description.slice(0, 60)}...
+                </p>
+
+                <div className="flex items-center justify-between mt-2">
+                  <span className="text-yellow-400 font-semibold text-sm">
+                    ⭐ {game.ratingAvg}
+                  </span>
+
+                  <button className="bg-gradient-to-r from-purple-600 to-pink-600 px-3 py-1 rounded-md text-xs font-medium hover:opacity-90 transition duration-300">
+                    View
+                  </button>
+                </div>
+              </div>
+            </div>
+          </Link>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 
