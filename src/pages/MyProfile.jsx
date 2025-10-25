@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const MyProfile = () => {
-  const user = {
-    name: "Ekramul Haque",
-    email: "contract-ekram@gmail.com",
-    photo: "/profile-placeholder.png", // put your image path here
-    joined: "January 2024",
-  };
+  // const user = {
+  //   name: "Ekramul Haque",
+  //   email: "contract-ekram@gmail.com",
+  //   photo: "/profile-placeholder.png", // put your image path here
+  //   joined: "January 2024",
+  // };
+  const {user } =useContext(AuthContext)
 
   return (
     <div className=" bg-[#0b0b15] text-gray-200 py-29 px-4 md:px-10">
@@ -16,16 +18,16 @@ const MyProfile = () => {
           {/* Profile Photo */}
           <img
             className="w-[150px] h-[150px] md:w-[220px] md:h-[220px] object-cover rounded-full border-3 border-purple-400 shadow-md"
-            src={user.photo}
+            src={user?.photoURL || "https://i.ibb.co/2n4D0nL/default-avatar.png"}
             alt="Profile"
           />
 
           {/* Profile Info */}
           <div className="flex-1 text-center md:text-left">
-            <h2 className="text-3xl font-bold text-pink-400">{user.name}</h2>
+            <h2 className="text-3xl font-bold text-pink-400">{user?.displayName || "No Name"}</h2>
             <p className="text-sm text-gray-400 mt-1">
               Email:{" "}
-              <span className="text-pink-300 font-medium">{user.email}</span>
+              <span className="text-pink-300 font-medium">{user?.email || 'example@gmail.com'}</span>
             </p>
 
             <hr className="my-5 border-gray-700" />

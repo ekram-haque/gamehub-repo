@@ -1,10 +1,24 @@
-import React from "react";
-import { Link } from "react-router";
+import React, { useContext } from "react";
+import { Link, NavLink } from "react-router";
 import Container from "./Container";
 import img from "../assets/Gamehub.jpg";
 import MyLink from "./MyLink";
+import { AuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
+  const { user,setUser,logout } = useContext(AuthContext);
+
+    const handlelogout =()  =>{
+    logout().then(() =>{
+      setUser(null)
+    }).catch((error)=>{
+        console.log("Logout Error:", error);
+    })
+  }
+
+
+
+
   return (
     <div className="bg-[#0f0f1a] shadow-md sticky top-0 z-50 backdrop-blur-md bg-opacity-80">
       <Container>
@@ -75,22 +89,33 @@ const Navbar = () => {
             >
               Premium
             </MyLink>
+            {user && 
             <MyLink
               to="/my-profile"
               className="text-gray-300 hover:text-purple-400"
             >
               My Profile
-            </MyLink>
+            </MyLink>}
           </div>
 
           {/* Right - Login/Signup Button */}
           <div className="">
-            <a
-              href="#"
-              className="bg-linear-to-r from-purple-600 to-pink-600 text-white px-5 py-2 rounded-md font-semibold hover:opacity-70 transition duration-300 shadow-md"
-            >
-              Register
-            </a>
+            {user ? (
+              <button
+               
+                onClick={handlelogout}
+                className="bg-linear-to-r from-purple-600 to-pink-600 text-white px-5 py-2 rounded-md font-semibold hover:opacity-70 transition duration-300 shadow-md"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link
+                to={"/login"}
+                className="bg-linear-to-r from-purple-600 to-pink-600 text-white px-5 py-2 rounded-md font-semibold hover:opacity-70 transition duration-300 shadow-md"
+              >
+                Login
+              </Link>
+            )}
           </div>
         </div>
       </Container>

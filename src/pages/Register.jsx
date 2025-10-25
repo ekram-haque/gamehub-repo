@@ -1,45 +1,58 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router";
-import {  createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase/firebase.config";
+import {  sendEmailVerification, updateProfile } from "firebase/auth";
+
 import { toast } from "react-toastify";
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
+import { AuthContext } from "../context/AuthContext";
 
 const Register = () => {
+  const [showpass, setShowpss] = useState(false);
 
-  const [showpass ,setShowpss] =useState(false)
+  const {createUserwithEmailPassfunc} = useContext(AuthContext )
 
-
-  const handleSignup = (e) =>{
-    e.preventDefault()
+  const handleSignup = (e) => {
+    e.preventDefault();
     const email = e.target.email?.value;
-    const password = e.target.password?.value
-    console.log('clicked' , {email,password})
+    const password = e.target.password?.value;
+    const displayName = e.target.name?.value;
+    const photoURL = e.target.photo?.value;
+    console.log("clicked", { email, password,displayName,photoURL });
 
-    const  regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{6,}$/ ;
-    if(!regex.test(password)){
-      toast.error('weak password')
-      return
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{6,}$/;
+    if (!regex.test(password)) {
+      toast.error("weak password");
+      return;
     }
 
-    createUserWithEmailAndPassword(auth, email, password)
-  .then((res) => {
-    console.log(res)
-    toast.success('signup successful')
-  })
-  .catch((error) => {
-    console.log(error)
-    toast.error(error.message)
-  });
+   createUserwithEmailPassfunc(email, password)
+      .then((res) => {
+        updateProfile(res.user,{
+          displayName,
+          photoURL
+        }).then(() =>(
 
+          sendEmailVerification(res.user).then(()=>(
 
+            toast .success('check your email to verified!')
+          )
 
-  }
+          )
 
-
-
-
+        )
+        )  .catch((error) => {
+        console.log(error);
+        toast.error(error.message);
+      });
+        console.log(res);
+        
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.message);
+      });
+  };
 
   return (
     <div className=" bg-[#0b0b15] flex  items-center justify-center px-4 py-10">
@@ -80,30 +93,29 @@ const Register = () => {
           <div className=" mb-4">
             <label className="block text-sm text-gray-300 mb-2">Email</label>
             <input
-              type='email'
+              type="email"
               name="email"
               placeholder="Enter your email"
               className="w-full px-4 py-3 rounded-lg bg-[#1b1b2f] border border-gray-600 text-gray-200 placeholder-gray-400 focus:outline-none focus:border-pink-400 transition"
             />
-
-            
-
           </div>
 
           {/* Password */}
           <div className="mb-4 relative">
             <label className=" text-sm text-gray-300 mb-2">Password</label>
             <input
-              type={showpass ? 'text' : 'password'}
+              type={showpass ? "text" : "password"}
               name="password"
               placeholder="Enter your password"
               className="w-full px-4 py-3 rounded-lg bg-[#1b1b2f] border border-gray-600 text-gray-200 placeholder-gray-400 focus:outline-none focus:border-pink-400 transition"
             />
 
-            <span onClick={() =>(setShowpss(!showpass))} className="absolute right-4 top-11 cursor-pointer">
-              {showpass? <FaEye/> : <IoEyeOff/> }
-               </span>
-
+            <span
+              onClick={() => setShowpss(!showpass)}
+              className="absolute right-4 top-11 cursor-pointer"
+            >
+              {showpass ? <FaEye /> : <IoEyeOff />}
+            </span>
           </div>
 
           {/* Register Button */}

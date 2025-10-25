@@ -1,34 +1,47 @@
-import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import React, { useState } from "react";
+import { GoogleAuthProvider} from "firebase/auth";
+import React, { useContext, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import { auth } from "../firebase/firebase.config";
+
 import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
+import { AuthContext } from "../context/AuthContext";
 
-const provider = new GoogleAuthProvider();
+
 
 const Login = () => {
   const [showpass, setShowpss] = useState(false);
-  const [user, setUser] = useState(null);
+  const navigate =useNavigate()
+    const location = useLocation();
 
+    const from = location.state?.from?.pathname || "/";
+
+  const {user,setUser,signInWithEmailAndPasswordfunc, signInWithPopupfunc} = useContext(AuthContext )
+
+ 
   const handleSignin = (e) => {
     e.preventDefault();
     const email = e.target.email?.value;
     const password = e.target.password?.value;
     console.log("clicked", { email, password });
 
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{6,}$/;
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#]).{6,}$/;
     if (!regex.test(password)) {
       toast.error("weak password");
       return;
     }
 
-    signInWithEmailAndPassword(auth, email, password)
+   signInWithEmailAndPasswordfunc(email,password)
       .then((res) => {
+        if(!res.user.emailVerified){
+            toast.error('email is not verified')
+            return
+        }
         console.log(res);
         setUser(res.user);
+        
+        navigate(from, { replace: true });
         toast.success("login successful");
       })
       .catch((error) => {
@@ -39,10 +52,11 @@ const Login = () => {
 
   const handleGoogleSignin = () =>{
 
-    signInWithPopup(auth, provider)
+    signInWithPopupfunc()
     .then((res) => {
         console.log(res);
         setUser(res.user);
+         navigate(from, { replace: true });
         toast.success("login successful google");
       })
       .catch((error) => {
@@ -50,6 +64,9 @@ const Login = () => {
         toast.error(error.message);
       });
   }
+
+
+
 
   return (
     <div className=" bg-[#0b0b15] flex items-center justify-center px-4 py-15">
@@ -66,6 +83,7 @@ const Login = () => {
             <input
               type="email"
               name="email"
+              
               placeholder="Enter your email"
               className="w-full px-4 py-3 rounded-lg bg-[#1b1b2f] border border-gray-600 text-gray-200 placeholder-gray-400 focus:outline-none focus:border-pink-400 transition"
             />
@@ -90,9 +108,9 @@ const Login = () => {
 
           {/* Forgot Password */}
           <div className="text-right mb-5">
-            <a href="#" className="text-sm text-pink-300 hover:underline">
+            <Link type="button" to={'/forget-password'}   className="text-sm text-pink-300 hover:underline">
               Forgot password?
-            </a>
+            </Link>
           </div>
 
           {/* Submit Button */}
