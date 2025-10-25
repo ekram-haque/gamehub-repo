@@ -15,7 +15,7 @@ const MyProfile = () => {
         <div className="flex flex-col md:flex-row items-center gap-10">
           {/* Profile Photo */}
           <img
-            className="w-[180px] h-[180px] md:w-[220px] md:h-[220px] object-cover rounded-full border-4 border-pink-400 shadow-md"
+            className="w-[150px] h-[150px] md:w-[220px] md:h-[220px] object-cover rounded-full border-3 border-purple-400 shadow-md"
             src={user.photo}
             alt="Profile"
           />
@@ -35,18 +35,18 @@ const MyProfile = () => {
               <div className="bg-[#1b1b2f] px-6 py-4 rounded-xl text-center w-full sm:w-[180px]">
                 <p className="text-gray-400 text-sm">Joined</p>
                 <p className="text-lg font-semibold text-white">
-                  {user.joined}
+                  coming soon
                 </p>
               </div>
 
               <div className="bg-[#1b1b2f] px-6 py-4 rounded-xl text-center w-full sm:w-[180px]">
                 <p className="text-gray-400 text-sm">Total Games</p>
-                <p className="text-lg font-semibold text-white">12</p>
+                <p className="text-lg font-semibold text-white">coming soon</p>
               </div>
 
               <div className="bg-[#1b1b2f] px-6 py-4 rounded-xl text-center w-full sm:w-[180px]">
                 <p className="text-gray-400 text-sm">Favorites</p>
-                <p className="text-lg font-semibold text-white">5</p>
+                <p className="text-lg font-semibold text-white">coming soon</p>
               </div>
             </div>
           </div>
