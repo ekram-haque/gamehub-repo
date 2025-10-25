@@ -38,6 +38,7 @@ const ForgetPass = () => {
           <div className="mb-4">
             <label className="block text-sm text-gray-300 mb-2">Email</label>
             <input
+            required
               type="email"
               name="email"
                 ref={emailRef}

@@ -1,4 +1,4 @@
-import { GoogleAuthProvider} from "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router";
@@ -8,18 +8,17 @@ import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
 import { AuthContext } from "../context/AuthContext";
 
-
-
 const Login = () => {
   const [showpass, setShowpss] = useState(false);
-  const navigate =useNavigate()
-    const location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
+  
 
-    const from = location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/";
 
-  const {user,setUser,signInWithEmailAndPasswordfunc, signInWithPopupfunc} = useContext(AuthContext )
+  const { setUser, signInWithEmailAndPasswordfunc, signInWithPopupfunc } =
+    useContext(AuthContext);
 
- 
   const handleSignin = (e) => {
     e.preventDefault();
     const email = e.target.email?.value;
@@ -32,15 +31,15 @@ const Login = () => {
       return;
     }
 
-   signInWithEmailAndPasswordfunc(email,password)
+    signInWithEmailAndPasswordfunc(email, password)
       .then((res) => {
-        if(!res.user.emailVerified){
-            toast.error('email is not verified')
-            return
+        if (!res.user.emailVerified) {
+          toast.error("email is not verified");
+          return;
         }
         console.log(res);
         setUser(res.user);
-        
+
         navigate(from, { replace: true });
         toast.success("login successful");
       })
@@ -50,23 +49,19 @@ const Login = () => {
       });
   };
 
-  const handleGoogleSignin = () =>{
-
+  const handleGoogleSignin = () => {
     signInWithPopupfunc()
-    .then((res) => {
+      .then((res) => {
         console.log(res);
         setUser(res.user);
-         navigate(from, { replace: true });
-        toast.success("login successful google");
+        navigate(from, { replace: true });
+        toast.success("login successful from google");
       })
       .catch((error) => {
         console.log(error);
         toast.error(error.message);
       });
-  }
-
-
-
+  };
 
   return (
     <div className=" bg-[#0b0b15] flex items-center justify-center px-4 py-15">
@@ -83,7 +78,7 @@ const Login = () => {
             <input
               type="email"
               name="email"
-              
+              required
               placeholder="Enter your email"
               className="w-full px-4 py-3 rounded-lg bg-[#1b1b2f] border border-gray-600 text-gray-200 placeholder-gray-400 focus:outline-none focus:border-pink-400 transition"
             />
@@ -93,6 +88,7 @@ const Login = () => {
           <div className="mb-4 relative">
             <label className="block text-sm text-gray-300 mb-2">Password</label>
             <input
+            required
               type={showpass ? "text" : "password"}
               name="password"
               placeholder="Enter your password"
@@ -108,7 +104,11 @@ const Login = () => {
 
           {/* Forgot Password */}
           <div className="text-right mb-5">
-            <Link type="button" to={'/forget-password'}   className="text-sm text-pink-300 hover:underline">
+            <Link
+              type="button"
+              to={"/forget-password"}
+              className="text-sm text-pink-300 hover:underline"
+            >
               Forgot password?
             </Link>
           </div>

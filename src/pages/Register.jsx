@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router";
-import {  sendEmailVerification, updateProfile } from "firebase/auth";
+import { Link, useNavigate } from "react-router";
+import { sendEmailVerification, updateProfile } from "firebase/auth";
 
 import { toast } from "react-toastify";
 import { FaEye } from "react-icons/fa";
@@ -10,7 +10,8 @@ import { AuthContext } from "../context/AuthContext";
 const Register = () => {
   const [showpass, setShowpss] = useState(false);
 
-  const {createUserwithEmailPassfunc} = useContext(AuthContext )
+  const { createUserwithEmailPassfunc,setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -18,7 +19,7 @@ const Register = () => {
     const password = e.target.password?.value;
     const displayName = e.target.name?.value;
     const photoURL = e.target.photo?.value;
-    console.log("clicked", { email, password,displayName,photoURL });
+    console.log("clicked", { email, password, displayName, photoURL });
 
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{6,}$/;
     if (!regex.test(password)) {
@@ -26,27 +27,26 @@ const Register = () => {
       return;
     }
 
-   createUserwithEmailPassfunc(email, password)
+    createUserwithEmailPassfunc(email, password)
       .then((res) => {
-        updateProfile(res.user,{
+
+        updateProfile(res.user, {
           displayName,
-          photoURL
-        }).then(() =>(
-
-          sendEmailVerification(res.user).then(()=>(
-
-            toast .success('check your email to verified!')
+          photoURL,
+        })
+          .then(() =>
+            sendEmailVerification(res.user).then(() => {
+              toast.success("check your email to verified!");
+              setUser(null)
+              navigate("/login");
+              return
+            })
           )
-
-          )
-
-        )
-        )  .catch((error) => {
-        console.log(error);
-        toast.error(error.message);
-      });
+          .catch((error) => {
+            console.log(error);
+            toast.error(error.message);
+          });
         console.log(res);
-        
       })
       .catch((error) => {
         console.log(error);
@@ -69,6 +69,7 @@ const Register = () => {
               Full Name
             </label>
             <input
+            required
               type="text"
               name="name"
               placeholder="Enter your name"
@@ -82,6 +83,7 @@ const Register = () => {
               Photo URL
             </label>
             <input
+            required
               type="text"
               name="photo"
               placeholder="Paste your photo URL"
@@ -93,6 +95,7 @@ const Register = () => {
           <div className=" mb-4">
             <label className="block text-sm text-gray-300 mb-2">Email</label>
             <input
+            required
               type="email"
               name="email"
               placeholder="Enter your email"
@@ -104,6 +107,7 @@ const Register = () => {
           <div className="mb-4 relative">
             <label className=" text-sm text-gray-300 mb-2">Password</label>
             <input
+            required
               type={showpass ? "text" : "password"}
               name="password"
               placeholder="Enter your password"
