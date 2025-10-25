@@ -87,9 +87,9 @@ const Navbar = () => {
           <div className="">
             <a
               href="#"
-              className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-5 py-2 rounded-md font-semibold hover:opacity-70 transition duration-300 shadow-md"
+              className="bg-linear-to-r from-purple-600 to-pink-600 text-white px-5 py-2 rounded-md font-semibold hover:opacity-70 transition duration-300 shadow-md"
             >
-              Login / Signup
+              Register
             </a>
           </div>
         </div>

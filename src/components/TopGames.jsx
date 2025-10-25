@@ -9,18 +9,17 @@ const TopGames = () => {
   const { games, loading } = useGames();
   if (loading || games.length === 0) {
     return (
-      <div className="text-center text-gray-400 mt-10 flex justify-center items-center h-screen bg-[#0b0b15]">
+      <div className="text-center text-gray-400 mt-10  flex justify-center items-center h-screen bg-[#0b0b15]">
         <LoadingAnim />
       </div>
     );
   }
 
-  // Sort by rating (highest first) and pick top 7
-  const topGames = [...games].sort((a, b) => b.ratings - a.ratings).slice(0, 7);
+  const topGames = [...games].sort((a, b) => b.ratingAvg - a.ratingAvg).slice(0, 7);
 
   return (
     <section className="bg-[#0f0f1a] py-16 text-white">
-      {/* Header */}
+ 
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">
           Top Rated Games
@@ -30,9 +29,9 @@ const TopGames = () => {
         </p>
       </div>
 
-      {/* Games Grid */}
+      
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2  gap-8 px-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2  gap-8 px-6">
         {topGames.map((game) => (
           <Link to={`/games/${game.id}`}>
             <div className="group flex items-center gap-4 bg-[#181826] rounded-2xl p-4 border border-transparent hover:border-purple-500 hover:shadow-purple-700/30 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer">
@@ -60,8 +59,8 @@ const TopGames = () => {
                     ⭐ {game.ratingAvg}
                   </span>
 
-                  <button className="bg-gradient-to-r from-purple-600 to-pink-600 px-3 py-1 rounded-md text-xs font-medium hover:opacity-90 transition duration-300">
-                    View
+                  <button className="bg-linear-to-r from-purple-600 to-pink-600 px-3 py-1 rounded-md text-xs font-medium hover:opacity-90 transition duration-300">
+                    View more
                   </button>
                 </div>
               </div>

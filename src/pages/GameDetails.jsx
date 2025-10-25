@@ -56,12 +56,12 @@ const GameDetails = () => {
 
           {/* Game Info */}
           <div className="flex-1">
-            <h2 className="text-3xl font-bold text-pink-400 mb-1">
+            <h2 className="text-3xl font-bold text-purple-400 mb-1">
               {game.title}
             </h2>
             <p className="text-sm text-gray-400 mb-3">
-              Developed by{" "}
-              <span className="text-pink-300 font-medium">
+              Developed by- {"  "}
+              <span className="text-purple-500 font-medium">
                 {game.developer}
               </span>
             </p>
