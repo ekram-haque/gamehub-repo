@@ -27,7 +27,7 @@ const ForgetPass = () => {
 
   return (
     <div className=" bg-[#0b0b15] flex items-center justify-center px-4 py-30">
-      <title>GameHub - Login page</title>
+      <title>GameHub - send forget password </title>
       <div className="bg-[#121225] w-full max-w-md p-8 rounded-2xl shadow-xl border border-gray-700">
         <h1 className="text-3xl font-bold text-purple-500 mb-6 text-center">
           Forget Password

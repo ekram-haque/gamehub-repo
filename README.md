@@ -1,16 +1,63 @@
-# React + Vite
+🌐 GameHub — 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+📝 Project Summary
+GameHub is a modern gaming platform built with React, where users can explore games, access premium content, and manage their personal profile. It supports Email/Password and Google authentication, ensuring a secure login experience. Users can view game details, track favorites, and manage their profile with a clean, responsive UI.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🚀 Features
 
-## React Compiler
+🏠 1. Home Page
+- Responsive Navbar for easy navigation.
+- Hero section highlighting platform features.
+- Trending Games displayed dynamically.
+- Modern Footer section with links.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+🎮 2. Games Page
+- Displays all available games in responsive card layouts.
+- Each game card contains:
+  - Game Image
+  - Game Title
+  - Category
+  - Total Downloads (coming soon)
+- Clicking a card navigates to Game Details Page.
 
-## Expanding the ESLint configuration
+ℹ️ 3. Game Details Page
+- Shows full game information including:
+  - Total Downloads 
+  - Description
+- Protected route: only accessible for logged-in users.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+👤 4. My Profile Page
+- Displays user information:
+  - Name
+  - Email
+  - Profile photo
+- Joined date and game statistics (coming soon)
+- Accessible only when logged in.
+
+💻 Tech Stack
+| Technology | Purpose |
+|------------|---------|
+| React| Frontend Framework |
+| Tailwind CSS | Styling & Responsiveness |
+| DaisyUI | Pre-styled Components |
+| JavaScript (ES6+) | Logic & Functionality |
+| HTML5 / CSS3 | Base Structure |
+| Firebase Authentication | Email/Google Auth |
+| React Router | Navigation |
+| React Toastify | Notifications |
+
+🧩 Key Highlights
+- ⚡ Built with React Functional Components
+- 🎨 Fully Responsive Design (Mobile, Tablet, Desktop)
+- 🧭 Smooth Navigation with React Router
+- 🔔 Interactive Toast Notifications
+- 🧠 Reusable Component Architecture
+- 🗂️ Version Control via Git & GitHub
+
+☁️ Deployment
+Hosted on [Cloudflare Pages](https://your-live-link.com) for fast global access and performance.
+
+🧑‍💻 Author
+Developed by Ekramul Haque  
+Frontend Developer | React Enthusiast | Lifelong Learner 🚀
