@@ -56,7 +56,7 @@ GameHub is a modern gaming platform built with React, where users can explore ga
 - 🗂️ Version Control via Git & GitHub
 
 ☁️ Deployment
-Hosted on [live link:](https://gamehub-library.pages.dev/) for fast global access and performance.
+Hosted on [ Gamehub-live link](https://gamehub-library.pages.dev/) for fast global access and performance.
 
 🧑‍💻 Author
 Developed by Ekramul Haque  
