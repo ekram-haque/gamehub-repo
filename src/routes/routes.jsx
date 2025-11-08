@@ -66,7 +66,7 @@ const router = createBrowserRouter([
         element:<ForgetPass />
       },
       {
-        path:'/update-profile',
+        path:'/my-profile/update-profile',
         element:<UpdateProfile />
       },
        

@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 
 const UpdateProfile = () => {
+    
   const { user, setUser } = useContext(AuthContext);
   const [displayName, setDisplayName] = useState(user?.displayName || "");
   const [photoURL, setPhotoURL] = useState(user?.photoURL || "");

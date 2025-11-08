@@ -12,7 +12,11 @@ const Login = () => {
   const [showpass, setShowpss] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  
+
+  // const handleForgetPasswordRedirect = () => {
+  //   const email = document.querySelector('input[name="email"]').value;
+  //   navigate("/forget-password", { state: { email } });
+  // };
 
   const from = location.state?.from?.pathname || "/";
 
@@ -62,6 +66,7 @@ const Login = () => {
         toast.error(error.message);
       });
   };
+  
 
   return (
     <div className=" bg-[#0b0b15] flex items-center justify-center px-4 py-15">
@@ -88,7 +93,7 @@ const Login = () => {
           <div className="mb-4 relative">
             <label className="block text-sm text-gray-300 mb-2">Password</label>
             <input
-            required
+              required
               type={showpass ? "text" : "password"}
               name="password"
               placeholder="Enter your password"
@@ -104,13 +109,18 @@ const Login = () => {
 
           {/* Forgot Password */}
           <div className="text-right mb-5">
-            <Link
+            <button
               type="button"
-              to={"/forget-password"}
               className="text-sm text-pink-300 hover:underline"
+              onClick={() => {
+                const email = document.querySelector(
+                  'input[name="email"]'
+                ).value;
+                navigate("/forget-password", { state: { email } });
+              }}
             >
               Forgot password?
-            </Link>
+            </button>
           </div>
 
           {/* Submit Button */}

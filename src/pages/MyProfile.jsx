@@ -20,7 +20,7 @@ const MyProfile = () => {
 
   if (!user) return null;
   const handleUpdateClick = () => {
-    navigate("/update-profile");
+    navigate("/my-profile/update-profile");
   };
 
   return (

@@ -1,13 +1,14 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router";
+import { useNavigate,useLocation  } from "react-router";
 
 const ForgetPass = () => {
      const emailRef = useRef(null)
      const {sendPasswordResetEmailfunc} = useContext(AuthContext )
 
      const navigate =useNavigate()
+     const location = useLocation();
 
     const handleForgetPassword = (e) => {
         e.preventDefault()
@@ -16,14 +17,28 @@ const ForgetPass = () => {
       sendPasswordResetEmailfunc(email)
         .then(() => {
           toast.success("see your email to  change password");
+          window.open("https://mail.google.com", "_blank");
           navigate('/login')
 
         })
         .catch((e) => {
           toast.error(e.message);
         });
+
+
+
+
+
     };
-  
+    // Prefill email if passed from login
+    useEffect(() => {
+      if (location.state?.email) {
+        emailRef.current.value = location.state.email;
+      }
+    }, [location.state]);
+    
+
+
 
   return (
     <div className=" bg-[#0b0b15] flex items-center justify-center px-4 py-30">
